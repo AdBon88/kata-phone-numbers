@@ -1,6 +1,6 @@
 
 //execution
-const dataSet = readDataSetFromFile('phone_data.txt')
+const dataSet = readDataSetFromFile('phone_data_small.txt')
 const phoneNumberArray = extractPhoneNumbers(dataSet, []);
 console.log(isConsistent(phoneNumberArray));
 //end execution

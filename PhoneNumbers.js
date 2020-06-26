@@ -1,6 +1,6 @@
 
 //execution
-const dataSet = readDataSetFromFile('phone_data_small.txt')
+const dataSet = readDataSetFromFile('phone_data.txt')
 const phoneNumberArray = extractPhoneNumbers(dataSet, []);
 console.log(isConsistent(phoneNumberArray));
 //end execution
@@ -44,16 +44,5 @@ function isConsistent(phoneNumberArray, currentIndex, comparativeIndex){
     if (currentIndex != phoneNumberArray.length - 1) {
         return  isConsistent(phoneNumberArray, currentIndex + 1, 0)
     }
-
     return true;
 }
-
-
-// function isConsistent(phoneNumberArray) {
-//     return true;
-// }
-//
-//
-// const catArray = ["Bob", "Trudy", "Alice"];
-//
-// console.log(test(catArray))

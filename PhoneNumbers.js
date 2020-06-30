@@ -4,26 +4,18 @@ const fs = require('fs');
 var counter = 0;
 const dataSet = readDataSetFromFile('phone_data.txt')
 
-newIsConsistent(dataSet);
-//const NameAndNumbersArray = splitNameAndNumbers(dataSet, []);
-//const phoneNumbersArray = extractPhoneNumbers(NameAndNumbersArray, []);
-//if(isConsistent(phoneNumbersArray)){
-//    console.log('The phone numbers are consistent!')
-//} else {
-//    console.log('The phone numbers are NOT consistent!')
-//}
+const NameAndNumbersArray = splitNameAndNumbers(dataSet, []);
+const phoneNumbersArray = extractPhoneNumbers(NameAndNumbersArray, []);
+if(isConsistent(phoneNumbersArray)){
+   console.log('The phone numbers are consistent!')
+} else {
+   console.log('The phone numbers are NOT consistent!')
+}
 //end execution
 
 function readDataSetFromFile(path) {
-    return fs.readFileSync(path);
-}
-
-function newIsConsistent(dataSet){
-    const string = dataSet.toString().replace(/\r\n/g,'\n');
-    console.log(dataSet.toString());
-    //const array = string.split("\n");
-
-
+    const dataSet = fs.readFileSync(path);
+    return dataSet.toString().replace(/\r\n/g,'\n').split("\n");
 }
 
 

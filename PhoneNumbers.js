@@ -2,10 +2,10 @@ const fs = require('fs');
 
 //execution
 var counter = 0;
-const dataSet = readDataSetFromFile('phone_data.txt')
+const dataSet = readDataSetFromFile('phone_data_10000.txt')
 
-const NameAndNumbersArray = splitNameAndNumbers(dataSet, []);
-const phoneNumbersArray = extractPhoneNumbers(NameAndNumbersArray, []);
+//const NameAndNumbersArray = splitNameAndNumbers(dataSet, []);
+const phoneNumbersArray = extractPhoneNumbers(dataSet, []);
 if(isConsistent(phoneNumbersArray)){
    console.log('The phone numbers are consistent!')
 } else {
@@ -19,7 +19,7 @@ function readDataSetFromFile(path) {
 }
 
 
-function splitNameAndNumbers(currentDataSet, currentNameAndNumbersArray) {
+function extractPhoneNumbers(currentDataSet, currentPhoneNumbersArray) {
     counter++;
     console.log(counter);
 
@@ -27,22 +27,22 @@ function splitNameAndNumbers(currentDataSet, currentNameAndNumbersArray) {
 
     if(nameAndNumberString === ''){ //last line is blank, want to remove and skip this)
         const remainingDataSet = currentDataSet.slice(0,currentDataSet.length - 1)
-        return splitNameAndNumbers(remainingDataSet, currentNameAndNumbersArray);
+        return extractPhoneNumbers(remainingDataSet, currentPhoneNumbersArray);
     }
 
-    const nameAndNumberArray = nameAndNumberString.split(",");
-    const newNameAndNumbersArray = [nameAndNumberArray, ...currentNameAndNumbersArray];
+    const phoneNumber = nameAndNumberString.substring(nameAndNumberString.indexOf(",") + 1, nameAndNumberString.indexOf("\n") - 1);
+    const newPhoneNumbersArray = [phoneNumber, ...currentPhoneNumbersArray];
 
     if(currentDataSet.length === 2) {
-        return newNameAndNumbersArray;
+        return newPhoneNumbersArray;
     }
 
     const remainingDataSet = currentDataSet.slice(0,currentDataSet.length - 1)
-    return splitNameAndNumbers(remainingDataSet, newNameAndNumbersArray);
+    return extractPhoneNumbers(remainingDataSet, newPhoneNumbersArray);
 }
 
 
-function extractPhoneNumbers(currentNameAndNumbersArray, currentPhoneNumbersArray){
+function extractPhoneNumbersOLD(currentNameAndNumbersArray, currentPhoneNumbersArray){
 
     const phoneNumberString = currentNameAndNumbersArray[0][1].replace(/[ -]/g, '');
     const newPhoneNumberArray = [phoneNumberString, ...currentPhoneNumbersArray];
